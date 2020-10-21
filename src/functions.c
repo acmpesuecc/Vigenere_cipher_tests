@@ -14,12 +14,10 @@ void remove_spaces(char* str)
 		}
 		c++;
 	}
-	blank[d] = '\0';
 	for(e=0; e<strlen(str); e++)
 	{
 		str[e] = blank[e];
 	}
-	str[e]='\0';
 }
 
 void allupper(char* str)
