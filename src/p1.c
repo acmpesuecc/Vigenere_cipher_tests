@@ -10,7 +10,7 @@ int main()
 	int status_arr[strlen(msg)];
 	for(int i = 0; i < strlen(msg); i++)
 	{
-		if((msg[i] > 'a' && msg[i] < 'z') || (msg[i] > 'A' && msg[i] < 'Z') || msg[i] == ' ')
+		if((msg[i] > 'a' && msg[i] < 'z') || (msg[i] > 'A' && msg[i] < 'Z') || msg[i] == ' ') // to ensure that only letters and spaces are considered
 		{
 			status_arr[i] = 1;
 		}
@@ -21,7 +21,7 @@ int main()
 
 	for(int i = 0; i < strlen(msg); i++)
 	{
-		if(status_arr[i] == 0)
+		if(status_arr[i] == 0) // if any element of the status_arr array has a value 0, it has a character which is not a letter
 		{
 			status = 0; // a character other than a letter is found
 			printf("Warning: Type only letters!\n");
