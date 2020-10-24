@@ -3,21 +3,50 @@
  
 int main()
 {
-    	char msg[300], key[300]; 
-	printf("Enter the message to encrypt in caps and no spaces:\n");
-	scanf("%[^\n]",msg);
-	printf("Enter the key to use in caps and no spaces:\n");
-	scanf("%s",key);
+    char msg[300], key[300]; 
+	label: printf("Enter the message to encrypt in caps :\n");
+	scanf("%[^\n]%*c",msg);
+	int status = 0;
+	int status_arr[strlen(msg)];
+	for(int i = 0; i < strlen(msg); i++)
+	{
+		if((msg[i] > 'a' && msg[i] < 'z') || (msg[i] > 'A' && msg[i] < 'Z') || msg[i] == ' ') // to ensure that only letters and spaces are considered
+		{
+			status_arr[i] = 1;
+		}
+		else{
+			status_arr[i] = 0;
+		}
+	}
+
+	for(int i = 0; i < strlen(msg); i++)
+	{
+		if(status_arr[i] == 0) // if any element of the status_arr array has a value 0, it has a character which is not a letter
+		{
+			status = 0; // a character other than a letter is found
+			printf("Warning: Type only letters!\n");
+			goto label;
+		}
+		else
+		{
+			status = 1;
+		}
+	}	
+
+	if(status == 1)
+	{
+		printf("Enter the key to use in caps :\n");
+		scanf("%[^\n]%*c",key);
     	int msgLen = strlen(msg), keyLen = strlen(key), i, j;
     	char newKey[msgLen], encryptedMsg[msgLen], decryptedMsg[msgLen];
     	//generating new key
     	for(i = 0, j = 0; i < msgLen; ++i, ++j)
-	{
+		{
         	if(j == keyLen)
             		j = 0;
         	newKey[i] = key[j];
     	}
-    	//encryption
+    	//encryption  
     	for(i = 0; i < msgLen; ++i)
         	encryptedMsg[i] = ((msg[i] + newKey[i]) % 26) + 'A';
     	//decryption
@@ -29,4 +58,5 @@ int main()
     	printf("\nEncrypted Message: %s", encryptedMsg);
     	printf("\nDecrypted Message: %s\n", decryptedMsg);
 	return 0;
+	}
 }
