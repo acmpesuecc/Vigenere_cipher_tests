@@ -46,7 +46,7 @@ int main()
             		j = 0;
         	newKey[i] = key[j];
     	}
-    	//encryption
+    	//encryption  
     	for(i = 0; i < msgLen; ++i)
         	encryptedMsg[i] = ((msg[i] + newKey[i]) % 26) + 'A';
     	//decryption
