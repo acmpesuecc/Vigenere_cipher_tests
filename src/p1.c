@@ -4,12 +4,17 @@
 int main()
 {
         char msg[300], key[300];
+        char temp;
         printf("Enter the message to encrypt in caps: \n");
         scanf("%[^\n]",msg);
 
+        scanf("%c",&temp); // temp statement to clear buffer
+
+        printf("Enter the key in caps: \n");
+        scanf("%[^\n]",key);
+
         char new_msg[300];
         int c = 0, d = 0;
-        int arr[300];
         while (msg[c] != '\0')
         {
 
@@ -21,15 +26,25 @@ int main()
         }
         new_msg[d] = '\0';
 
-        printf("Enter the key to use in caps and no spaces:\n");
-        scanf("%s",key);
+        char new_key[300];
+        c = 0; d = 0;
+        while (key[c] != '\0')
+        {
 
-    	int msgLen = strlen(new_msg), keyLen = strlen(key), i, j;
+          if ((key[c] != ' ')) {
+            new_key[d] = key[c];
+            d++;
+          }
+          c++;
+        }
+        new_key[d] = '\0';
+
+    	int msgLen = strlen(new_msg), keyLen = strlen(new_key), i, j;
     	char newKey[msgLen], encryptedMsg[msgLen], decryptedMsg[msgLen];
     	//generating new key
     	for(i = 0, j = 0; i < msgLen;i++)
         {
-        	newKey[i] = key[j];
+        	newKey[i] = new_key[j];
         	j++;
         	if(j == keyLen)
                 j=0;
