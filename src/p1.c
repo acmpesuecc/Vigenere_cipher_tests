@@ -1,14 +1,29 @@
 #include<stdio.h>
 #include<string.h>
- 
+
 int main()
 {
-    	char msg[300], key[300]; 
-	printf("Enter the message to encrypt in caps and no spaces:\n");
-	scanf("%[^\n]",msg);
-	printf("Enter the key to use in caps and no spaces:\n");
-	scanf("%s",key);
-    	int msgLen = strlen(msg), keyLen = strlen(key), i, j;
+        char msg[300], key[300];
+        printf("Enter the message to encrypt in caps: \n");
+        scanf("%[^\n]",msg);
+
+        char new_msg[300];
+        int c = 0, d = 0;
+        int arr[300];
+        while (msg[c] != '\0')
+        {
+          if ((msg[c] != ' ')) {
+            new_msg[d] = msg[c];
+            d++;
+          }
+          c++;
+        }
+        new_msg[d] = '\0';
+
+        printf("Enter the key to use in caps and no spaces:\n");
+        scanf("%s",key);
+
+    	int msgLen = strlen(new_msg), keyLen = strlen(key), i, j;
     	char newKey[msgLen], encryptedMsg[msgLen], decryptedMsg[msgLen];
     	//generating new key
     	for(i = 0, j = 0; i < msgLen; ++i, ++j)
@@ -19,7 +34,7 @@ int main()
     	}
     	//encryption
     	for(i = 0; i < msgLen; ++i)
-        	encryptedMsg[i] = ((msg[i] + newKey[i]) % 26) + 'A';
+        	encryptedMsg[i] = ((new_msg[i] + newKey[i]) % 26) + 'A';
     	//decryption
     	for(i = 0; i < msgLen; ++i)
         	decryptedMsg[i] = (((encryptedMsg[i] - newKey[i]) + 26) % 26) + 'A';
