@@ -5,7 +5,7 @@ int main()
 {
     	char msg[300], key[300]; 
 	printf("Enter the message to encrypt in caps and no spaces:\n");
-	scanf("%s",msg);
+	scanf("%[^\n]",msg);
 	printf("Enter the key to use in caps and no spaces:\n");
 	scanf("%s",key);
     	int msgLen = strlen(msg), keyLen = strlen(key), i, j;
