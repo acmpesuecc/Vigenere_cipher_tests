@@ -12,6 +12,7 @@ int main()
         int arr[300];
         while (msg[c] != '\0')
         {
+
           if ((msg[c] != ' ')) {
             new_msg[d] = msg[c];
             d++;
@@ -26,18 +27,23 @@ int main()
     	int msgLen = strlen(new_msg), keyLen = strlen(key), i, j;
     	char newKey[msgLen], encryptedMsg[msgLen], decryptedMsg[msgLen];
     	//generating new key
-    	for(i = 0, j = 0; i < msgLen; ++i, ++j)
-	{
-        	if(j == keyLen)
-            		j = 0;
+    	for(i = 0, j = 0; i < msgLen;i++)
+        {
         	newKey[i] = key[j];
+        	j++;
+        	if(j == keyLen)
+                j=0;
     	}
+    	newKey[msgLen]='\0';
     	//encryption
-    	for(i = 0; i < msgLen; ++i)
+    	for(i = 0; i < strlen(newKey); ++i)
         	encryptedMsg[i] = ((new_msg[i] + newKey[i]) % 26) + 'A';
+
+        encryptedMsg[msgLen]='\0';
     	//decryption
-    	for(i = 0; i < msgLen; ++i)
+    	for(i = 0; i < strlen(newKey); ++i)
         	decryptedMsg[i] = (((encryptedMsg[i] - newKey[i]) + 26) % 26) + 'A';
+        decryptedMsg[msgLen]='\0';
     	printf("Original Message: %s", msg);
     	printf("\nKey: %s", key);
     	printf("\nNew Generated Key: %s", newKey);
